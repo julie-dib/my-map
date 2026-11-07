@@ -1,0 +1,1005 @@
+{
+  "_note": "Every assumption of the Weimar biodiversity scenario map. All values are scenario assumptions, not measurements. Change a value here; never hard-code it in the app.",
+  "layouts": {
+    "today": {
+      "label": "Today",
+      "streets": "roads",
+      "planting": "existing only",
+      "people": [
+        "walking",
+        "bikes",
+        "cars",
+        "buses"
+      ],
+      "rings": false,
+      "year": 2026
+    },
+    "opening": {
+      "label": "Around 2050",
+      "streets": "meadow and paths",
+      "planting": "new trees, shrubs, meadows, ponds",
+      "people": [
+        "walking",
+        "bikes",
+        "robots",
+        "teleport stations"
+      ],
+      "rings": true,
+      "year": 2050
+    },
+    "growing": {
+      "label": "Around 2100",
+      "streets": "green with trees",
+      "planting": "as 2050 + more trees (2075) + green roofs",
+      "people": [
+        "walking",
+        "bikes",
+        "robots",
+        "teleport stations"
+      ],
+      "rings": true,
+      "year": 2100
+    }
+  },
+  "maturity_years": {
+    "_note": "years after planting until a plant counts for the species",
+    "meadow": 2,
+    "shrub": 8,
+    "tree": 30,
+    "dead_wood": 50,
+    "pond": 3
+  },
+  "planting_start_year": 2050,
+  "street_green_band_width_m": 12,
+  "planned_tree_spacing_m": 24,
+  "min_tree_distance_to_building_m": 3,
+  "planned_shrub_spacing_m": 6,
+  "planting": {
+    "_note": "Planned planting, written by npm run precompute into derived/planting.json: where trees, shrubs, meadow strips and ponds go, and the year each is planted. First wave in planting_start_year (2050): trees, shrubs, meadow and ponds. Second wave in trees.second_wave_year (2075): more trees in between, along the green bands and in the squares. A layout shows what is planted up to its year (layouts.*.year). Placement rules are in trees.placement.",
+    "later_tree_share": 0,
+    "later_tree_years": [
+      2060,
+      2080
+    ],
+    "square_groups": {
+      "_note": "tree clusters in the squares (plots with landuse square)",
+      "area_per_group_m2": 1500,
+      "trees_per_group": [
+        3,
+        5
+      ],
+      "group_radius_m": 7,
+      "keep_off_paths_m": 2
+    },
+    "ponds": {
+      "_note": "ponds from Around 2050 on: in squares and public green areas, away from buildings and paths, spread over the map. Drawn as soft-edged shapes: wobble bends the outline, soft_edge_share adds a paler rim.",
+      "places": [
+        "square",
+        "park",
+        "grass",
+        "meadow",
+        "recreation_ground"
+      ],
+      "radius_m": 4,
+      "keep_off_buildings_m": 3,
+      "keep_off_paths_m": 3,
+      "years": [
+        2050,
+        2050
+      ],
+      "candidate_spacing_m": 5,
+      "wobble": 0.2,
+      "soft_edge_share": 0.3
+    },
+    "_later_trees_note": "later_tree_share is 0: the later trees are replaced by the second wave (trees.second_wave_year). Kept so the random draws, and with them the first-wave places, stay the same."
+  },
+  "green_roofs": {
+    "_note": "Around 2100 only: every service building (rings.service_uses) gets a green roof: a white rim of rim_m along the roof edge, green inside, raised by raise_m so it does not flicker. Small bushes and flower clumps per 100 m² of green roof, scattered with the seed, at least keep_off_rim_m inside the green and min_gap_m apart. Written by npm run precompute into derived/roofs.json.",
+    "layouts": [
+      "growing"
+    ],
+    "rim_m": 1,
+    "raise_m": 0.05,
+    "keep_off_rim_m": 0.4,
+    "min_gap_m": 1.6,
+    "bushes_per_100m2": 1.2,
+    "flower_clumps_per_100m2": 3,
+    "bush_height_m": [
+      0.5,
+      1.1
+    ],
+    "bush_width_share": [
+      1.2,
+      1.8
+    ],
+    "flower_height_m": [
+      0.25,
+      0.45
+    ],
+    "flower_width_m": [
+      0.5,
+      0.9
+    ],
+    "habitat_for_groups": {
+      "_note": "species groups (species.json) for which green roofs count as habitat in the route steps: the flying species (birds, butterflies, bees, bat)",
+      "groups": [
+        "hopping",
+        "canopy",
+        "high_flyer",
+        "low_flyer",
+        "bat"
+      ]
+    }
+  },
+  "trees": {
+    "_note": "Five low-poly tree types. Heights in metres; crown width as a share of the tree height. Every tree gets its own height, crown width and slight crown squash from the random seed. Planned trees take the same size ranges as existing trees, times scale_2050 in Around 2050 (young) and scale_2100 in Around 2100 (fully grown and emphasised for the diagram).",
+    "types": {
+      "round": {
+        "label": "round broadleaf (oak, lime, maple)",
+        "height_m": [
+          8,
+          18
+        ],
+        "crown_width_share": [
+          0.6,
+          0.85
+        ],
+        "genera": [
+          "Quercus",
+          "Tilia",
+          "Acer",
+          "Platanus",
+          "Aesculus",
+          "Castanea",
+          "Robinia",
+          "Acacia",
+          "Juglans",
+          "Ulmus"
+        ]
+      },
+      "oval": {
+        "label": "tall oval broadleaf (beech, ash)",
+        "height_m": [
+          14,
+          26
+        ],
+        "crown_width_share": [
+          0.4,
+          0.55
+        ],
+        "genera": [
+          "Fagus",
+          "Fraxinus",
+          "Betula",
+          "Ginkgo",
+          "Prunus",
+          "Alnus"
+        ]
+      },
+      "columnar": {
+        "label": "narrow columnar (poplar, hornbeam)",
+        "height_m": [
+          12,
+          25
+        ],
+        "crown_width_share": [
+          0.18,
+          0.3
+        ],
+        "genera": [
+          "Populus",
+          "Carpinus"
+        ]
+      },
+      "conifer": {
+        "label": "conifer (cone)",
+        "height_m": [
+          8,
+          22
+        ],
+        "crown_width_share": [
+          0.3,
+          0.45
+        ],
+        "genera": [
+          "Pinus",
+          "Picea",
+          "Abies",
+          "Larix",
+          "Taxus",
+          "Thuja",
+          "Taxodium",
+          "Taxodum",
+          "Pseudotsuga"
+        ]
+      },
+      "multi_stem": {
+        "label": "small multi-stem tree or large shrub (hazel, hawthorn, rowan)",
+        "height_m": [
+          4,
+          8
+        ],
+        "crown_width_share": [
+          0.75,
+          1
+        ],
+        "genera": [
+          "Corylus",
+          "Crataegus",
+          "Sorbus",
+          "Sambucus",
+          "Cornus",
+          "Salix",
+          "Ligustrum",
+          "Malus"
+        ]
+      }
+    },
+    "leaf_type": {
+      "_note": "used when the genus is unknown",
+      "needleleaved": "conifer"
+    },
+    "existing_type_weights": {
+      "_note": "for mapped trees without a known genus or leaf type; broadleaved trees use the same weights without conifer",
+      "round": 0.5,
+      "oval": 0.2,
+      "columnar": 0.1,
+      "conifer": 0.1,
+      "multi_stem": 0.1
+    },
+    "shrub": {
+      "_note": "low, wide, irregular shrubs: always lower than any tree and wider than tall. Shrubs younger than maturity_years.shrub are drawn at young_scale (1 = full size already in Around 2050).",
+      "height_m": [
+        1.2,
+        2.5
+      ],
+      "crown_width_share": [
+        1.3,
+        1.9
+      ],
+      "squash": [
+        0.7,
+        1.3
+      ],
+      "young_scale": 1
+    },
+    "planned_type_weights": {
+      "_note": "planned trees: type chosen at random by these weights",
+      "round": 0.35,
+      "oval": 0.2,
+      "columnar": 0.1,
+      "conifer": 0.05,
+      "multi_stem": 0.3
+    },
+    "colour_variation": {
+      "_note": "each tree, shrub and meadow clump gets its own shade: hue, saturation and lightness shifted at random by up to these amounts either way",
+      "hue_deg": 6,
+      "saturation": 0.06,
+      "lightness": 0.05
+    },
+    "placement": {
+      "_note": "How planned trees, shrubs and meadow clumps are placed along the green bands (the former streets) and in the squares. Lengths in metres; shares of planned_tree_spacing_m where named so.",
+      "junction_clear_m": 8,
+      "lateral_offset_share_of_band": 0.33,
+      "lateral_jitter_m": 1.2,
+      "keep_off_path_m": 2,
+      "along_jitter_share": 0.15,
+      "min_tree_gap_m": 5,
+      "patterns": {
+        "_note": "chosen at random for each stretch: short rows, irregular rhythms (tree, tree, gap, tree), small clusters, single trees",
+        "row": 0.3,
+        "rhythm": 0.25,
+        "cluster": 0.2,
+        "single": 0.25
+      },
+      "row_trees": [
+        2,
+        4
+      ],
+      "rhythm_steps": [
+        3,
+        5
+      ],
+      "rhythm_tree_share": 0.65,
+      "cluster_trees": [
+        3,
+        5
+      ],
+      "cluster_radius_m": 5,
+      "step_share_of_spacing": [
+        0.35,
+        0.5
+      ],
+      "gap_share_of_spacing": [
+        0.8,
+        2
+      ],
+      "light_acceptance": {
+        "_note": "chance that a tree spot is kept, by light class from derived/light.json",
+        "full_sun": 1,
+        "partial_shade": 0.45,
+        "shade": 0.12
+      },
+      "clearings": {
+        "_note": "open meadow clearings without planned trees (sand lizard, butterflies, bees): squares of cell_m chosen at random until share_of_full_sun of the full-sun ground in the green bands and squares lies in them",
+        "share_of_full_sun": 0.33,
+        "cell_m": 40
+      },
+      "shrubs": {
+        "group_size": [
+          1,
+          4
+        ],
+        "step_m": [
+          1.8,
+          3
+        ],
+        "gap_share_of_spacing": [
+          1.5,
+          4
+        ],
+        "keep_off_trees_m": 2.5,
+        "min_gap_m": 1.5,
+        "in_clearings": 0.3,
+        "_note": "shrub groups along the bands; the gap after a group is a share of planned_shrub_spacing_m"
+      },
+      "meadow": {
+        "_note": "meadow strips along the green bands, drawn flat with diagonal hatching: strips of patch_length_m with gaps between, from inner_m off the edge of the curving path (paths) to the band edge (less outer_margin_m); in the clearings the gaps are shorter",
+        "patch_length_m": [
+          8,
+          25
+        ],
+        "gap_m": [
+          6,
+          20
+        ],
+        "in_clearings_gap_scale": 0.5,
+        "inner_m": 0.5,
+        "outer_margin_m": 0.3,
+        "hatch_spacing_m": 1.6,
+        "hatch_width_m": 0.35
+      },
+      "patterns_second_wave": {
+        "_note": "second wave (Around 2100): same patterns, more clusters; steps and gaps are shares of spacing_2100_m, and the band is walked until the planned trees stand about spacing_2100_m apart",
+        "row": 0.25,
+        "rhythm": 0.2,
+        "cluster": 0.4,
+        "single": 0.15
+      },
+      "_keep_off_path_note": "keep_off_path_m: smallest sideways offset drawn for a plant; plants then keep paths.keep_plants_off_m off the path edge"
+    },
+    "scale_2050": 1.6,
+    "scale_2100": 1.6,
+    "_scale_note": "Planned first-wave trees take the existing-tree size ranges times scale_2050 / scale_2100 (both fully grown and emphasised for the diagram). Second-wave trees are 25 years old in 2100 and take scale_second_wave.",
+    "second_wave_year": 2075,
+    "spacing_2100_m": 8,
+    "scale_second_wave": 1.2
+  },
+  "pond_count_growing": 12,
+  "random_seed": 2100,
+  "grid_cell_m": 5,
+  "light": {
+    "_note": "average sun hours per day, April to September, buildings as only shade casters",
+    "full_sun_min_hours": 6,
+    "partial_shade_min_hours": 3,
+    "sample_days": [
+      "04-15",
+      "06-21",
+      "08-15"
+    ],
+    "sample_every_minutes": 30
+  },
+  "ground_cost": {
+    "_note": "cost per grid cell for ground species; null = barrier",
+    "building": null,
+    "road_today": 1000,
+    "path_with_bikes": 8,
+    "green_band": 2,
+    "garden": 1,
+    "private_garden": 1,
+    "park": 1,
+    "meadow": 1,
+    "scrub": 1,
+    "woodland": 1,
+    "allotments": 2,
+    "cemetery": 2,
+    "other_open_ground": 10
+  },
+  "broken_rule": "In the Today layout a ground route stops at the first road it would have to cross; mark the stop with a small cross.",
+  "max_gap_m": {
+    "_note": "largest jump between two habitat points (trees, shrubs or stepping stones), measured horizontally, whatever lies below",
+    "red_squirrel": 6,
+    "blue_tit": 50,
+    "great_tit": 60,
+    "great_spotted_woodpecker": 120,
+    "blackbird": 30,
+    "house_sparrow": 25,
+    "peacock_butterfly": 400,
+    "common_carder_bee": 300,
+    "pipistrelle": 50
+  },
+  "flying_species_ignore_buildings": true,
+  "arc_clears_roofs_by_m": 3,
+  "high_flyer_loop": {
+    "_note": "High flyers (woodpigeon, carrion crow): a smooth loop from an edge arrow over two feeding places and back. feeding_areas: the OpenStreetMap classes they feed on (plus the new meadow strips and the green roofs). max_radius_m: the loop is at most this far across (the largest distance between the arrow and its two feeding places); min_side_m: no two of these three points closer than this, so the loop stays open. smoothing: rounds of corner cutting. opacity: how see-through the loop is drawn.",
+    "feeding_areas": [
+      "meadow",
+      "park",
+      "grass"
+    ],
+    "max_radius_m": 600,
+    "min_side_m": 150,
+    "smoothing": 5,
+    "opacity": 0.5
+  },
+  "people": {
+    "walking_speed_m_per_min": 80,
+    "reach_minutes": [
+      5,
+      10,
+      15
+    ],
+    "reach_band_m": 25,
+    "path_height_band_m": [
+      0,
+      3
+    ],
+    "robots_work": "daytime only",
+    "mowing_rule": "robots mow by day only, cut high, and mow one patch at a time",
+    "_note": "Pressure zones (layouts with rings): the areas reached on foot from the rings in reach_minutes, walking along the walkable edges of streets.graph.json at walking_speed_m_per_min from the node nearest each ring: the reached street segments (with the reached part of the last one), widened by reach_band_m on each side and joined into one shape per time. pressure_zone_opacity: how strongly they are drawn. path_height_band_m: species routes running this high (computed height, not the drawn arcs) meet the people where they cross a road (Today) or a path (later): interaction points. Written by npm run precompute into derived/people.json.",
+    "pressure_zone_opacity": 0.6
+  },
+  "paths": {
+    "_note": "Around 2050 and Around 2100: every green band keeps a path for walking, bikes and robots, width_m wide, gently curving inside the band: its centre line is shifted sideways by up to curve_amplitude_m in slow waves (one wave every curve_wavelength_m), fading to the street line at both ends so the paths meet at the junctions. No tree, shrub or meadow closer than keep_plants_off_m to the path edge. people, bikes and robots: static figures standing on the paths.",
+    "layouts": [
+      "opening",
+      "growing"
+    ],
+    "width_m": 2,
+    "curve_amplitude_m": 1.5,
+    "curve_wavelength_m": [
+      30,
+      60
+    ],
+    "keep_plants_off_m": 0.5,
+    "people": 300,
+    "bikes": 80,
+    "robots": 30,
+    "_main_note": "Main paths (layouts in paths.layouts): the shortest connections between the rings along the paths, as a minimum spanning network (every ring linked, shortest total length), drawn main_width_m wide in colours.main_path. Gathering places: a round paved place of gathering_radius_m where three or more main paths meet.",
+    "main_width_m": 3,
+    "gathering_radius_m": 6
+  },
+  "traffic": {
+    "_note": "Today layout only: parked cars, buses and bikes on the streets. Around 2050 and Around 2100 have no cars and no buses.",
+    "cars": 400,
+    "buses": 20,
+    "bikes": 40
+  },
+  "rings": {
+    "_note": "Teleport stations (Around 2050 and Around 2100, layouts with rings: true): glowing neon spheres of radius_m, floating height_m above the ground. One above every bus stop; the kit has no bus stops, so one above every building whose use is transport (stop_uses) instead. One above every service building (service_uses) with a footprint larger than min_service_footprint_m2. Spheres closer than merge_within_m to each other become one, at the midpoint of the spheres they replace; the pressure zones and main paths start from these merged points. Today a bus stands at the street next to every stop instead. Written by npm run precompute into derived/people.json.",
+    "height_m": 60,
+    "radius_m": 14,
+    "merge_within_m": 150,
+    "stop_uses": [
+      "Transport"
+    ],
+    "service_uses": [
+      "Service",
+      "Civic",
+      "Health",
+      "Education",
+      "Retail"
+    ],
+    "min_service_footprint_m2": 800,
+    "glow": {
+      "_note": "The neon look, made only of transparent layers (no bloom, no post-processing, no light on the scene): the core sphere in core_colour with a small white highlight on its upper left (highlight: size and offset as shares of the radius); halo_layers: see-through spheres around it, scale = radius as share of the sphere radius; beam_layers: nested see-through columns from the sphere down to the ground, outermost first, the last one a thin brighter core; ground_spot: a soft pink spot where the beam meets the ground.",
+      "core_colour": "#FF4FA8",
+      "halo_colour": "#FF2E93",
+      "highlight": {
+        "colour": "#FFFFFF",
+        "size_share": 0.22,
+        "offset_share": [
+          -0.38,
+          0.4
+        ],
+        "opacity": 0.9
+      },
+      "halo_layers": [
+        {
+          "scale": 1.3,
+          "opacity": 0.22
+        },
+        {
+          "scale": 1.65,
+          "opacity": 0.11
+        },
+        {
+          "scale": 2,
+          "opacity": 0.05
+        }
+      ],
+      "beam_layers": [
+        {
+          "radius_m": 5,
+          "colour": "#FF2E93",
+          "opacity": 0.12
+        },
+        {
+          "radius_m": 2.6,
+          "colour": "#FF4FA8",
+          "opacity": 0.22
+        },
+        {
+          "radius_m": 1,
+          "colour": "#FFC4E1",
+          "opacity": 0.85
+        }
+      ],
+      "ground_spot": {
+        "radius_m": 16,
+        "colour": "#FF4FA8",
+        "opacity": 0.45
+      }
+    }
+  },
+  "habitat_buffer_for_residents_m": 200,
+  "drawing": {
+    "dot_spacing_m": 4,
+    "arc_length_low_m": 6,
+    "arc_length_high_m": 15,
+    "zigzag_amplitude_m": 2,
+    "parallel_route_offset_m": 4,
+    "corridor_band_opacity": 0.15,
+    "corridor_band_width_m": 14,
+    "home_marker_m": 6,
+    "same_species_merge_m": 6,
+    "same_species_min_shared_m": 30,
+    "_same_species_note": "Routes of the same species share one lane (parallel_route_offset_m only separates different species). Where a route runs within same_species_merge_m of an earlier route of its species for at least same_species_min_shared_m, that stretch is drawn once, by the earlier route, wherever that one is shown. Loops that come back the same way are drawn as one line with an arrowhead at each end."
+  },
+  "colours": {
+    "ground_plane": "#E5E9EB",
+    "building": "#FFFFFF",
+    "service_building": "#E9DCC8",
+    "greenery_fill": "#B9C7A3",
+    "greenery_opacity": 1,
+    "tree_existing": "#9AAE84",
+    "tree_planned": "#4F6B45",
+    "tree_trunk": "#8A7F72",
+    "pond": "#BFD8DC",
+    "meadow_hatch": "#8FA673",
+    "green_roof": "#9FB57E",
+    "green_roof_rim": "#FFFFFF",
+    "roof_flowers": [
+      "#F4D892",
+      "#F2B6A3",
+      "#C9B6D9"
+    ],
+    "light_full_sun": "#F4D892",
+    "light_partial": "#F2B6A3",
+    "light_shade": "#94BEBB",
+    "interaction_outline": "#F0A39A",
+    "human_path": "#9A9893",
+    "pressure_zones": [
+      "#F4C4DA",
+      "#F8D6E5",
+      "#FBE6EF"
+    ],
+    "car": "#8E9296",
+    "bike": "#4A4D50",
+    "bus": "#6F7478",
+    "path": "#EDE9E1",
+    "person": "#A3A6A9",
+    "path_bike": "#7F8387",
+    "robot": "#B9BCBF",
+    "route_faded": "#D3D5D8",
+    "edge_arrow": "#6B6E72",
+    "main_path": "#E2DACB",
+    "gathering_place": "#D9CFBC"
+  },
+  "display": {
+    "_note": "How the 3D map is lit. Display only: this sun has nothing to do with the light classes in derived/light.json. No building has an outline; buildings separate from the ground through light and shadow.",
+    "sun": {
+      "_note": "azimuth in degrees clockwise from north (255 = west-southwest), altitude in degrees above the horizon",
+      "azimuth_deg": 255,
+      "altitude_deg": 35
+    },
+    "shadow_strength": 0.3
+  },
+  "species_circle": {
+    "_note": "a ring in the route colour; inside it, with a wide gap, a smaller pastel disc (route colour mixed with white); the animal on top. Sizes as share of the ring's outer radius.",
+    "ring_width_share": 0.07,
+    "disc_radius_share": 0.67,
+    "disc_tint_white_share": 0.75,
+    "animal_fit_share": {
+      "_note": "farthest visible pixel of the animal, as share of the ring's outer radius",
+      "overflow_groups": [
+        "hopping",
+        "canopy",
+        "high_flyer",
+        "bat"
+      ],
+      "overflow": 1.18,
+      "inside": 0.9
+    },
+    "_map_note": "map_size_m: the ring of the species circle across, at map scale (it still shrinks with distance); ring_share_of_image: the ring outer edge as share of the circle image half width (measured on the images); a circle sits centred on its route line, moved along the route to a spot at least clearance_m clear of other routes, crosses and circles; image_version: change it when the circle images are replaced, so browsers load them again.",
+    "map_size_m": 40,
+    "ring_share_of_image": 0.77,
+    "clearance_m": 6,
+    "image_version": "2026-11-07"
+  },
+  "routes": {
+    "_note": "Species routes, written by npm run precompute into derived/routes.json. Routes are models, not tracked movements. Every route is computed once, on the Around 2100 city, and keeps exactly the same line in every layout: where it already works it is drawn in full, where it does not it is cut at its first barrier and ends in a small cross (broken). Routes accumulate: the Today routes run through the existing greenery; Around 2050 adds routes opened by the green bands and the new planting; Around 2100 adds routes opened by the second planting wave, the ponds and the green roofs. How a route ends when it works (stay, loop or cross) is the species behaviour (species.json) in the layout where the route first appears; a route that appears in a layout marked broken ends as in the next layout.",
+    "habitats": {
+      "_note": "Large habitats around Weimar. Each gets an arrow on the map edge, placed where the green link leaves the map in that direction: the window (metres from the kit centre along the named side) is searched for the place with the most green ground in a strip probe_width_m wide and probe_depth_m deep. inside: green areas inside the kit that are sources too, found by their OpenStreetMap name.",
+      "probe_width_m": 60,
+      "probe_depth_m": 150,
+      "min_arrow_gap_m": 200,
+      "edges": [
+        {
+          "id": "ettersberg",
+          "label": "Ettersberg",
+          "toward": "north to northwest",
+          "windows": [
+            {
+              "side": "north",
+              "from_m": -670,
+              "to_m": 150
+            },
+            {
+              "side": "west",
+              "from_m": 750,
+              "to_m": 971
+            }
+          ]
+        },
+        {
+          "id": "tiefurt",
+          "label": "Ilm toward Tiefurt",
+          "toward": "northeast",
+          "windows": [
+            {
+              "side": "north",
+              "from_m": 250,
+              "to_m": 670
+            },
+            {
+              "side": "east",
+              "from_m": 450,
+              "to_m": 971
+            }
+          ]
+        },
+        {
+          "id": "webicht",
+          "label": "Webicht",
+          "toward": "east",
+          "windows": [
+            {
+              "side": "east",
+              "from_m": -350,
+              "to_m": 400
+            }
+          ]
+        },
+        {
+          "id": "belvedere",
+          "label": "Ilm valley toward Belvedere",
+          "toward": "south",
+          "windows": [
+            {
+              "side": "south",
+              "from_m": -670,
+              "to_m": 670
+            }
+          ]
+        },
+        {
+          "id": "paradies",
+          "label": "Paradies",
+          "toward": "west",
+          "windows": [
+            {
+              "side": "west",
+              "from_m": -300,
+              "to_m": 700
+            }
+          ]
+        }
+      ],
+      "inside": [
+        {
+          "id": "ilmpark",
+          "label": "Ilmpark",
+          "osm_names": [
+            "Ilmpark"
+          ]
+        },
+        {
+          "id": "webicht_inside",
+          "label": "Webicht",
+          "osm_names": [
+            "Webicht"
+          ]
+        }
+      ]
+    },
+    "source_radius_m": 60,
+    "road_half_width_m": 3.5,
+    "ground_cost_aliases": {
+      "_note": "OpenStreetMap classes without their own ground_cost",
+      "grass": "meadow",
+      "recreation_ground": "park"
+    },
+    "bat_cost": {
+      "_note": "cost per grid cell for bats: tree lines (cells within tree_line_within_m of a tree), woodland edges and the green bands are cheap; wide open squares and open green far from trees are dear",
+      "tree_line_within_m": 10,
+      "woodland_edge_within_m": 15,
+      "tree_line": 1,
+      "woodland_edge": 1,
+      "green_band": 2,
+      "woodland": 3,
+      "building": 8,
+      "open_square": 30,
+      "open_green": 12,
+      "other": 6
+    },
+    "loop_turn_share": 0.6,
+    "home_target_share": 0.6,
+    "exit_m": 40,
+    "homes": {
+      "_note": "Potential new homes: points of the habitat type in at, within search_m of the route, that meet the rule (light classes; near: at least count points of one of types within within_m; none_near: no such point within within_m; away_from_paths_m). Habitat types count only once mature in the layout (maturity_years); existing greenery and existing trees always count. Homes closer than min_spacing_m are counted once.",
+      "search_m": 60,
+      "min_spacing_m": 50,
+      "sample_spacing_m": 15,
+      "rules": {
+        "blackbird": {
+          "at": "shrub",
+          "near": [
+            {
+              "types": [
+                "lawn"
+              ],
+              "within_m": 20
+            }
+          ]
+        },
+        "great_tit": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 15,
+              "count": 2
+            }
+          ]
+        },
+        "blue_tit": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 15,
+              "count": 2
+            }
+          ]
+        },
+        "great_spotted_woodpecker": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "dead_wood"
+              ],
+              "within_m": 30
+            }
+          ]
+        },
+        "woodpigeon": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 25,
+              "count": 4
+            }
+          ]
+        },
+        "carrion_crow": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 25,
+              "count": 4
+            }
+          ]
+        },
+        "house_sparrow": {
+          "at": "shrub",
+          "near": [
+            {
+              "types": [
+                "building_edge"
+              ],
+              "within_m": 8
+            }
+          ]
+        },
+        "red_squirrel": {
+          "at": "old_tree",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 6,
+              "count": 3
+            }
+          ]
+        },
+        "peacock_butterfly": {
+          "at": "meadow",
+          "light": [
+            "full_sun"
+          ]
+        },
+        "common_carder_bee": {
+          "at": "meadow",
+          "light": [
+            "full_sun",
+            "partial"
+          ],
+          "away_from_paths_m": 4
+        },
+        "hedgehog": {
+          "at": "shrub",
+          "near": [
+            {
+              "types": [
+                "shrub"
+              ],
+              "within_m": 20,
+              "count": 2
+            },
+            {
+              "types": [
+                "old_tree",
+                "dead_wood"
+              ],
+              "within_m": 20
+            }
+          ]
+        },
+        "common_toad": {
+          "at": "pond",
+          "near": [
+            {
+              "types": [
+                "shrub",
+                "old_tree"
+              ],
+              "within_m": 20
+            }
+          ]
+        },
+        "sand_lizard": {
+          "at": "meadow",
+          "light": [
+            "full_sun"
+          ],
+          "none_near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 8
+            }
+          ]
+        },
+        "pipistrelle": {
+          "at": "building_edge",
+          "near": [
+            {
+              "types": [
+                "old_tree"
+              ],
+              "within_m": 15,
+              "count": 3
+            }
+          ]
+        }
+      },
+      "habitat_types": {
+        "_note": "what each habitat type is made of",
+        "old_tree": "existing trees, and planned trees older than maturity_years.tree",
+        "dead_wood": "woodland, and planned trees older than maturity_years.dead_wood",
+        "shrub": "scrub, gardens and allotments, and planned shrubs older than maturity_years.shrub",
+        "lawn": "parks, grass, recreation grounds, and planned meadow older than maturity_years.meadow",
+        "meadow": "meadow and grass, and planned meadow older than maturity_years.meadow",
+        "pond": "planned ponds older than maturity_years.pond",
+        "green_roof": "green roofs, in the layouts of green_roofs.layouts",
+        "building_edge": "points along the outlines of buildings"
+      },
+      "mowing_rule_for": [
+        "peacock_butterfly",
+        "common_carder_bee",
+        "house_sparrow",
+        "carrion_crow",
+        "woodpigeon",
+        "sand_lizard"
+      ]
+    },
+    "group_text": {
+      "ground": "walks on the ground along the cheapest way (ground_cost); buildings are barriers; today it stops at the first road",
+      "hopping": "hops from tree to tree, shrub and green roof, never further than its largest gap",
+      "canopy": "moves through the tree crowns, never further than its largest gap; rises over tall roofs",
+      "low_flyer": "flies low from meadow to park and garden (and green roofs in 2100), within its largest gap",
+      "bat": "flies at night along tree lines, woodland edges and the green bands, and avoids wide open squares",
+      "high_flyer": "flies a big loop above the roofs, from the edge to the feeding areas and back"
+    },
+    "_road_note": "road_half_width_m: half the width of a road in the Today layout; on the grid every cell the road touches counts, so no diagonal step slips across it",
+    "outside_network_reach_m": 150,
+    "_outside_note": "outside_network_reach_m: the street network stops short of the map edge; ground routes may use the land beyond its outermost streets only this close to their own start and end habitat, because the kit shows no roads there",
+    "seed": 2100,
+    "per_layout": {
+      "_note": "how many routes each species gets in each layout, [fewest, most]; the number is drawn with the seed",
+      "today": [
+        2,
+        3
+      ],
+      "opening": [
+        1,
+        2
+      ],
+      "growing": [
+        1,
+        2
+      ]
+    },
+    "highlight_new_s": 2,
+    "candidates": {
+      "_note": "Candidate routes run between anchors: the habitat arrows, the green areas inside (habitats.inside) and the largest existing green areas of anchor_classes (at least anchor_min_area_m2 inside the map, at least anchor_min_spacing_m apart, at most anchor_count). Routes shorter than min_length_m are dropped. Routes of one species share at most max_overlap_share of their length (in 20 m cells). Searching on the Around 2100 city, new planting costs a little more than existing greenery (newer_penalty, as share of the cost), so a route uses new planting only where it opens a way.",
+      "anchor_classes": [
+        "park",
+        "cemetery",
+        "allotments",
+        "woodland",
+        "garden",
+        "meadow",
+        "scrub",
+        "recreation_ground",
+        "grass"
+      ],
+      "anchor_min_area_m2": 4000,
+      "anchor_min_spacing_m": 200,
+      "anchor_count": 12,
+      "min_length_m": 350,
+      "max_overlap_share": 0.35,
+      "newer_penalty": {
+        "opening": 0.15,
+        "growing": 0.3
+      },
+      "search_hop_m": 80,
+      "_hop_note": "search_hop_m: while searching, hops are at most this long, which keeps the search quick; min_search_hop_m: but at least this long, so species with a very short largest gap (red squirrel) still get routes; the barrier check always uses max_gap_m",
+      "min_search_hop_m": 30
+    },
+    "circle_long_route_m": 800,
+    "_circle_note": "Species circles per route: under circle_long_route_m long, one (stay routes: at the end, the home; others: in the middle); longer, two (stay routes: at the end and about a third of the way; others: at about one third and two thirds). Each sits centred on the route line, moved a little along the route if its spot falls on a crossing."
+  },
+  "habitat_min_piece_m2": 500,
+  "_numbers_note": "Numbers (derived/numbers.json): unsealed green area = OpenStreetMap greenery (parks, gardens, grass, meadows, scrub, woodland, allotments, cemeteries) and, where the streets are green, the green bands without their paths; buildings, roads, paths and green roofs are sealed. Habitat pieces: connected unsealed areas of at least habitat_min_piece_m2. Residents near habitat: Zensus residents within habitat_buffer_for_residents_m of a habitat piece, each 100 m cell counted with the share of its area inside; cells without a resident count are left out and counted.",
+  "interactions": {
+    "_note": "Interaction points: where a species route, at its computed height within people.path_height_band_m, crosses a road (Today) or a path (later). Points closer than merge_within_m to each other become one, at their midpoint. Drawn as white dots of radius_m at map scale (shrinking with distance) with an outline of outline_px in colours.interaction_outline.",
+    "merge_within_m": 25,
+    "radius_m": 3,
+    "outline_px": 1
+  }
+}

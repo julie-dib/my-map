@@ -1,0 +1,604 @@
+{
+  "_note": "14 species shown on the Weimar biodiversity scenario map. Behaviour per layout: broken = the route stops at a barrier, cross = flies over without staying, loop = comes in and goes back, stay = settles (route ends in a potential home). Light: sun, partial, shade. Images: put a licensed photo at public/data/images/<image>; credits go in public/data/images/CREDITS.md.",
+  "groups": {
+    "ground": {
+      "label": "Ground",
+      "line": "solid",
+      "height_m": [
+        0,
+        0
+      ]
+    },
+    "hopping": {
+      "label": "Hopping",
+      "line": "low_arcs",
+      "height_m": [
+        1,
+        3
+      ]
+    },
+    "low_flyer": {
+      "label": "Low flyers",
+      "line": "small_dots",
+      "height_m": [
+        1,
+        5
+      ]
+    },
+    "bat": {
+      "label": "Bats",
+      "line": "zigzag",
+      "height_m": [
+        3,
+        15
+      ]
+    },
+    "canopy": {
+      "label": "Canopy",
+      "line": "high_arcs",
+      "height_m": [
+        8,
+        20
+      ]
+    },
+    "high_flyer": {
+      "label": "High flyers",
+      "line": "big_loop",
+      "height_m": [
+        25,
+        35
+      ]
+    }
+  },
+  "species": [
+    {
+      "id": "blackbird",
+      "name_en": "Blackbird",
+      "name_de": "Amsel",
+      "scientific": "Turdus merula",
+      "group": "hopping",
+      "colour": "#7F82B8",
+      "behaviour": {
+        "today": "stay",
+        "opening": "stay",
+        "growing": "stay"
+      },
+      "home_needs": "dense shrubs, leaf litter, lawn",
+      "food_plants": [
+        {
+          "en": "hawthorn",
+          "scientific": "Crataegus monogyna",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        },
+        {
+          "en": "rowan",
+          "scientific": "Sorbus aucuparia",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        },
+        {
+          "en": "elder",
+          "scientific": "Sambucus nigra",
+          "light": [
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "Cornelian cherry",
+          "scientific": "Cornus mas",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        },
+        {
+          "en": "privet",
+          "scientific": "Ligustrum vulgare",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 430,
+      "source": "GBIF",
+      "image": "Turdus merula.png",
+      "circle_image": "circles/Turdus merula.png"
+    },
+    {
+      "id": "great_tit",
+      "name_en": "Great tit",
+      "name_de": "Kohlmeise",
+      "scientific": "Parus major",
+      "group": "canopy",
+      "colour": "#D4AE3C",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "old trees with cavities",
+      "food_plants": [
+        {
+          "en": "pedunculate oak",
+          "scientific": "Quercus robur",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "beech",
+          "scientific": "Fagus sylvatica",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 411,
+      "source": "GBIF",
+      "image": "Parus major.png",
+      "circle_image": "circles/Parus major.png"
+    },
+    {
+      "id": "blue_tit",
+      "name_en": "Blue tit",
+      "name_de": "Blaumeise",
+      "scientific": "Cyanistes caeruleus",
+      "group": "canopy",
+      "colour": "#3A9BB5",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "old trees with cavities",
+      "food_plants": [
+        {
+          "en": "pedunculate oak",
+          "scientific": "Quercus robur",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "hawthorn",
+          "scientific": "Crataegus monogyna",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        }
+      ],
+      "gbif_records": 384,
+      "source": "GBIF",
+      "image": "Cyanistes caeruleus.png",
+      "circle_image": "circles/Cyanistes caeruleus.png"
+    },
+    {
+      "id": "great_spotted_woodpecker",
+      "name_en": "Great spotted woodpecker",
+      "name_de": "Buntspecht",
+      "scientific": "Dendrocopos major",
+      "group": "canopy",
+      "colour": "#9E3D5B",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "old trees and standing dead wood",
+      "food_plants": [
+        {
+          "en": "beech",
+          "scientific": "Fagus sylvatica",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "pedunculate oak",
+          "scientific": "Quercus robur",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "hazel",
+          "scientific": "Corylus avellana",
+          "light": [
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 367,
+      "source": "GBIF",
+      "image": "Dendrocopos major.png",
+      "circle_image": "circles/Dendrocopos major.png"
+    },
+    {
+      "id": "woodpigeon",
+      "name_en": "Woodpigeon",
+      "name_de": "Ringeltaube",
+      "scientific": "Columba palumbus",
+      "group": "high_flyer",
+      "colour": "#4F8F8A",
+      "behaviour": {
+        "today": "cross",
+        "opening": "cross",
+        "growing": "stay"
+      },
+      "home_needs": "tall trees",
+      "food_plants": [
+        {
+          "en": "ivy",
+          "scientific": "Hedera helix",
+          "light": [
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "beech",
+          "scientific": "Fagus sylvatica",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "white clover",
+          "scientific": "Trifolium repens",
+          "light": [
+            "sun"
+          ]
+        }
+      ],
+      "gbif_records": 339,
+      "source": "GBIF",
+      "image": "Columba palumbus.png",
+      "circle_image": "circles/Columba palumbus.png"
+    },
+    {
+      "id": "carrion_crow",
+      "name_en": "Carrion crow",
+      "name_de": "Rabenkrähe",
+      "scientific": "Corvus corone",
+      "group": "high_flyer",
+      "colour": "#4A4E5A",
+      "behaviour": {
+        "today": "cross",
+        "opening": "cross",
+        "growing": "stay"
+      },
+      "home_needs": "tall trees",
+      "food_plants": [
+        {
+          "en": "open meadow (soil animals)",
+          "scientific": null,
+          "light": [
+            "sun",
+            "partial"
+          ]
+        }
+      ],
+      "gbif_records": 322,
+      "source": "GBIF",
+      "image": "Corvus corone.png",
+      "circle_image": "circles/Corvus corone.png"
+    },
+    {
+      "id": "house_sparrow",
+      "name_en": "House sparrow",
+      "name_de": "Haussperling",
+      "scientific": "Passer domesticus",
+      "group": "hopping",
+      "colour": "#8B5A3C",
+      "behaviour": {
+        "today": "stay",
+        "opening": "stay",
+        "growing": "stay"
+      },
+      "home_needs": "building cavities, dense hedges",
+      "food_plants": [
+        {
+          "en": "seed meadow",
+          "scientific": null,
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "privet",
+          "scientific": "Ligustrum vulgare",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "hawthorn",
+          "scientific": "Crataegus monogyna",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        }
+      ],
+      "gbif_records": 291,
+      "source": "GBIF",
+      "image": "Passer domesticus.png",
+      "circle_image": "circles/Passer domesticus.png"
+    },
+    {
+      "id": "red_squirrel",
+      "name_en": "Red squirrel",
+      "name_de": "Eichhörnchen",
+      "scientific": "Sciurus vulgaris",
+      "group": "canopy",
+      "colour": "#E89C73",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "tree crowns that touch",
+      "food_plants": [
+        {
+          "en": "hazel",
+          "scientific": "Corylus avellana",
+          "light": [
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "beech",
+          "scientific": "Fagus sylvatica",
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "pedunculate oak",
+          "scientific": "Quercus robur",
+          "light": [
+            "sun"
+          ]
+        }
+      ],
+      "gbif_records": 128,
+      "source": "GBIF",
+      "image": "Sciurus vulgaris.png",
+      "circle_image": "circles/Sciurus vulgaris.png"
+    },
+    {
+      "id": "peacock_butterfly",
+      "name_en": "Peacock butterfly",
+      "name_de": "Tagpfauenauge",
+      "scientific": "Aglais io",
+      "group": "low_flyer",
+      "colour": "#7B4B6A",
+      "behaviour": {
+        "today": "stay",
+        "opening": "stay",
+        "growing": "stay"
+      },
+      "home_needs": "sunny nettle patches",
+      "food_plants": [
+        {
+          "en": "stinging nettle (caterpillars)",
+          "scientific": "Urtica dioica",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        },
+        {
+          "en": "brown knapweed (nectar)",
+          "scientific": "Centaurea jacea",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "field scabious (nectar)",
+          "scientific": "Knautia arvensis",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "wild marjoram (nectar)",
+          "scientific": "Origanum vulgare",
+          "light": [
+            "sun"
+          ]
+        }
+      ],
+      "gbif_records": 59,
+      "source": "GBIF",
+      "image": "Aglais io.png",
+      "circle_image": "circles/Aglais io.png"
+    },
+    {
+      "id": "common_carder_bee",
+      "name_en": "Common carder bee",
+      "name_de": "Ackerhummel",
+      "scientific": "Bombus pascuorum",
+      "group": "low_flyer",
+      "colour": "#C98A9B",
+      "behaviour": {
+        "today": "stay",
+        "opening": "stay",
+        "growing": "stay"
+      },
+      "home_needs": "undisturbed grassy corners",
+      "food_plants": [
+        {
+          "en": "red clover",
+          "scientific": "Trifolium pratense",
+          "light": [
+            "sun"
+          ]
+        },
+        {
+          "en": "bush vetch",
+          "scientific": "Vicia sepium",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        },
+        {
+          "en": "ground ivy",
+          "scientific": "Glechoma hederacea",
+          "light": [
+            "partial",
+            "shade"
+          ]
+        },
+        {
+          "en": "meadow cranesbill",
+          "scientific": "Geranium pratense",
+          "light": [
+            "sun",
+            "partial"
+          ]
+        }
+      ],
+      "gbif_records": 41,
+      "source": "GBIF",
+      "image": "Bombus pascuorum.png",
+      "circle_image": "circles/Bombus pascuorum.png"
+    },
+    {
+      "id": "hedgehog",
+      "name_en": "Hedgehog",
+      "name_de": "Igel",
+      "scientific": "Erinaceus europaeus",
+      "group": "ground",
+      "colour": "#657652",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "hedges, leaf and log piles, gaps between gardens",
+      "food_plants": [
+        {
+          "en": "native hedge with leaf litter",
+          "scientific": null,
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 34,
+      "source": "GBIF",
+      "image": "Erinaceus europaeus.png",
+      "circle_image": "circles/Erinaceus europaeus.png"
+    },
+    {
+      "id": "common_toad",
+      "name_en": "Common toad",
+      "name_de": "Erdkröte",
+      "scientific": "Bufo bufo",
+      "group": "ground",
+      "colour": "#A3963F",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "a pond with leaf litter nearby",
+      "food_plants": [
+        {
+          "en": "pond with native marginal plants",
+          "scientific": null,
+          "light": [
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 13,
+      "source": "GBIF",
+      "image": "Bufo bufo.png",
+      "circle_image": "circles/Bufo bufo.png"
+    },
+    {
+      "id": "sand_lizard",
+      "name_en": "Sand lizard",
+      "name_de": "Zauneidechse",
+      "scientific": "Lacerta agilis",
+      "group": "ground",
+      "colour": "#7FA650",
+      "behaviour": {
+        "today": "broken",
+        "opening": "loop",
+        "growing": "stay"
+      },
+      "home_needs": "full sun, dry ground, bare patches for eggs",
+      "food_plants": [
+        {
+          "en": "dry grassland with bare patches",
+          "scientific": null,
+          "light": [
+            "sun"
+          ]
+        }
+      ],
+      "gbif_records": 9,
+      "source": "GBIF",
+      "image": "Lacerta agilis.png",
+      "circle_image": "circles/Lacerta agilis.png"
+    },
+    {
+      "id": "pipistrelle",
+      "name_en": "Pipistrelle bat",
+      "name_de": "Zwergfledermaus",
+      "scientific": "Pipistrellus pipistrellus",
+      "group": "bat",
+      "colour": "#23617E",
+      "behaviour": {
+        "today": "loop",
+        "opening": "loop",
+        "growing": "loop"
+      },
+      "home_needs": "roosts in buildings, dark tree lines",
+      "food_plants": [
+        {
+          "en": "native hedge and trees (insects)",
+          "scientific": null,
+          "light": [
+            "sun",
+            "partial",
+            "shade"
+          ]
+        }
+      ],
+      "gbif_records": 0,
+      "source": "Detector survey, Burgholz 2018 (Arenhövel, Lüth & Maul, Thüringer Faunistische Abhandlungen XXIII)",
+      "image": "Pipistrellus pipistrellus.png",
+      "circle_image": "circles/Pipistrellus pipistrellus.png"
+    }
+  ]
+}

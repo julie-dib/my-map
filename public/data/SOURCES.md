@@ -94,3 +94,21 @@ How to read it:
 ## `kit.json`
 
 The kit area: `label`, `center` as `[lon, lat]`, `bbox` as `[west, south, east, north]`, `size_m` as `[width, height]`, and `generated`.
+
+## greenery.geojson
+- **What:** parks, gardens, grass, meadows, scrub, woodland, allotments, cemeteries, tree rows and single trees in and around central Weimar.
+- **Source:** OpenStreetMap, exported with Overpass Turbo on 5 November 2026.
+- **Licence:** © OpenStreetMap contributors, ODbL 1.0 — https://www.openstreetmap.org/copyright
+- **Processing:** tags reduced to `class`, `osm_id`, `name`, `genus`, `species`, `leaf_type`, `height`, `access`; coordinates rounded to 6 decimals (about 10 cm). The unchanged export is kept in `data/raw/greenery_osm_raw.geojson`.
+- **Fields:**
+  - `class`: one of `tree`, `tree_row`, `park`, `garden`, `grass`, `meadow`, `scrub`, `woodland`, `allotments`, `cemetery`, `recreation_ground`
+  - `access`: `private` marks private gardens
+  - `genus`, `species`, `leaf_type`, `height` (metres): only where mappers added them
+- **Units:** WGS84 longitude/latitude (EPSG:4326).
+- **Attribution line:** "Greenery: © OpenStreetMap contributors, ODbL"
+
+## Species selection (GBIF)
+- **What:** species list of occurrences recorded in central Weimar, 2010–2026 (human, machine and other observations; museum specimens excluded).
+- **Citation:** GBIF.org (5 November 2026) GBIF Occurrence Download https://doi.org/10.15468/dl.778bqm
+- **Raw file:** `data/raw/gbif_species_list_0001639-261104105008071.csv` (not loaded by the app).
+- **Attribution line:** "Species records: GBIF.org (5 Nov 2026), https://doi.org/10.15468/dl.778bqm"
