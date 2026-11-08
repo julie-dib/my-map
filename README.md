@@ -472,6 +472,6 @@ Attribution, as shown on the map:
 ## How this was made
 
 Tools: Claude Code, with the model Claude Opus 5.5 (`claude-opus-5-5`).
-I decided:
+I decided: the concept of Weimar in three layouts (Today, 2050, 2100), the 14 species from GBIF and how each one moves, the look of the map, and that the routes grow from layout to layout instead of moving.
 The agent did: it wrote the precompute scripts and the React Three Fiber app (layouts, planting, species routes, people, numbers and panel) from scenario.json and species.json, checked them in a headless browser, and wrote this README.
-I checked:
+I checked: the data sources and licences, the species list against GBIF and the Weimar field surveys, and every layout in the browser, on localhost and on the live page.
