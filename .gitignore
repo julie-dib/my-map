@@ -7,3 +7,6 @@ dist
 .env
 .env.*
 !.env.example
+
+# raw source data, kept out of git
+data/raw/

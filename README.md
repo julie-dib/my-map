@@ -1,4 +1,4 @@
-# Weimar Grows Wild
+# Weimar: three layouts
 
 An interactive 3D scenario map of central Weimar (about 1.3 × 2 km around the Markt) that shows how 14 animal species could move through the city, where they could find new homes, and where they meet people.
 
